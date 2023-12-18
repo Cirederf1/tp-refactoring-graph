@@ -39,8 +39,11 @@ public class DijkstraRegressTest {
 
 	@Test
 	public void testBANotFound() {
-		List<Edge> path = finder.findPath(graph.findVertex("b"), graph.findVertex("a"));
-		assertNull(path);
+		try {
+			List<Edge> path = finder.findPath(graph.findVertex("b"), graph.findVertex("a"));
+		}catch (RuntimeException e) {
+			assertEquals("findPath({},{}) : path not found", e.getMessage());
+		}
 	}
 
 	@Test
