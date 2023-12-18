@@ -25,4 +25,8 @@ public class Path {
 	public Edge get(int index) {
 		return edges.get(index);
 	}
+
+	public List<Edge> getEdges() {
+		return edges;
+	}
 }
