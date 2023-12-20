@@ -1,6 +1,6 @@
 package org.acme.graph;
 
-import org.acme.graph.model.Edge;
+
 import org.acme.graph.model.Graph;
 import org.acme.graph.model.Vertex;
 import org.locationtech.jts.geom.Coordinate;

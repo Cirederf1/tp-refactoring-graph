@@ -42,11 +42,11 @@ public class DijkstraPathFinder {
 	 */
 	public Path findPath(Vertex origin, Vertex destination) {
 		log.info("findPath({},{})...", origin, destination);
-		this.pathTree = new PathTree(graph, origin);
+		this.pathTree = new PathTree(origin);
 		Vertex current;
 		while ((current = findNextVertex()) != null) {
 			visit(current);
-			if (this.pathTree.getNode(destination).getReachingEdge() != null) {
+			if (this.pathTree.isReached(destination)) {
 				log.info("findPath({},{}) : path found", origin, destination);
 				return new Path(this.pathTree.getPath(destination));
 			}
@@ -97,20 +97,20 @@ public class DijkstraPathFinder {
 		Vertex result = null;
 		for (Vertex vertex : graph.getVertices()) {
 			// sommet déjà visité?
-			if (this.pathTree.getNode(vertex).isVisited()) {
+			if (this.pathTree.getOrCreateNode(vertex).isVisited()) {
 				continue;
 			}
 			// sommet non atteint?
-			if (this.pathTree.getNode(vertex).getCost() == Double.POSITIVE_INFINITY) {
+			if (this.pathTree.getOrCreateNode(vertex).getCost() == Double.POSITIVE_INFINITY) {
 				continue;
 			}
 			// sommet le plus proche de la source?
-			if (this.pathTree.getNode(vertex).getCost() < minCost) {
+			if (this.pathTree.getOrCreateNode(vertex).getCost() < minCost) {
 				result = vertex;
 			}
+
 		}
 		return result;
 	}
 	
-
 }
